@@ -167,6 +167,34 @@ const getJobById = asyncHandler(async (req, res, next) => {
     .json(new ApiResponse(200, job, "Job fetched successfully"));
 });
 
+const removeJob = asyncHandler(async (req, res, next) => {
+  const role = req.user.role;
+  const id = req.user._id;
+  if (role !== "employer") {
+    throw new ApiError(403, "Only employers are authorized to remove a job");
+  }
+
+  const { _id } = req.body;
+  if (!_id) {
+    throw new ApiError(400, "Job ID is required");
+  }
+
+  const job = await Job.findOne({ _id: _id, employer: id });
+  if (!job) {
+    throw new ApiError(404, "Job not found or you are not authorized");
+  }
+
+  if (!job.active) {
+    throw new ApiError(400, "Job is already inactive");
+  }
+
+  job.active = false;
+  await job.save();
+
+  return res.status(200).json(new ApiResponse(200, job, "Job set to inactive successfully"));
+});
+
+
 const postJob = asyncHandler(async (req, res, next) => {
   const { role, _id } = req.user;
   if (role !== "employer") {
@@ -380,6 +408,7 @@ export {
   getJobs,
   getJobById,
   postJob,
+  removeJob,
   sendJobDescription,
   applyForJob,
   saveJob,

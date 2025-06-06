@@ -1,5 +1,5 @@
  {
-  "name": "NextJobs",
+  "name": "nextjobs",
   "version": "1.0.0",
   "description": "A comprehensive job portal application structured as a monorepo.",
   "scripts": {

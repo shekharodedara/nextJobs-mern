@@ -6,17 +6,16 @@ import { useSelector } from "react-redux";
 
 function UserProfile() {
   const { status, userData } = useSelector((store) => store.auth);
+  const [selectedSection, setSelectedSection] = useState("editProfile");
+  const navigate = useNavigate();
 
-  if (userData.role === "employer") {
+  if (!userData || userData.role === "employer") {
     return <Navigate to="/" />;
   }
-  const [selectedSection, setSelectedSection] = useState("editProfile");
 
   const switchSection = (section) => {
     setSelectedSection(section);
   };
-
-  const navigate = useNavigate();
 
   const openPublicProfile = () => {
     navigate(`/user/${userData._id}`);

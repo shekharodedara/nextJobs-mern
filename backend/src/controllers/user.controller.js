@@ -7,7 +7,6 @@ import {
   uploadOnCloudinary,
 } from "../utils/cloudinary.service.js";
 import { JobSeekerProfile } from "../models/jobSeekerProfile.model.js";
-import { PRODUCTION_URL } from "../constants.js";
 
 // Testing endpoints
 const ping = (req, res) => {

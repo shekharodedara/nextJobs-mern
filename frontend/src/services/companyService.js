@@ -2,6 +2,7 @@ import { apiCall } from "./apiBase";
 
 export const companyService = {
   postNewJob,
+  removeJob,
   getAllJobListings,
   getNonActiveJobListings,
   getCompanyJobListings,
@@ -24,6 +25,10 @@ async function getAllApplications() {
 
 async function postNewJob(data) {
   return apiCall("post", "/jobs", data);
+}
+
+async function removeJob(data) {
+  return apiCall("post", "/remove-job", data);
 }
 
 async function generateJobDescription(data) {

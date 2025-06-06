@@ -41,9 +41,28 @@ function Dashboard() {
     }
   };
 
-  const navigate = useNavigate();
-  const redirectToDetail = (id) => {
-    navigate(`/job/${id}`);
+  // const navigate = useNavigate();
+  const redirectToDetail = async (job) => {
+        try {
+          const res = await companyService.removeJob(job);
+          fetchData();
+          console.log(res)
+          // setDialog({
+          //   isOpen: true,
+          //   title: "Job Posting Successful",
+          //   message: "Your job posting has been submitted successfully.",
+          //   buttonText: "Got it!",
+          //   ondblclick: () => navigate("/dashboard/home"),
+          // });
+        } catch (error) {
+          console.log(error)
+          // setDialog({
+          //   isOpen: true,
+          //   title: "Error Removing Job",
+          //   message: "error",
+          //   buttonText: "Okay",
+          // });
+        }
   };
 
   return (
@@ -117,10 +136,16 @@ function Dashboard() {
                   </TableCell>
                   <TableCell>
                     <Button
-                      color="black"
+                      color="black" className="mr-4"
                       onClick={() => redirectToDetail(job._id)}
                     >
                       View Job
+                    </Button>
+                    <Button
+                      color="red"
+                      onClick={() => redirectToDetail(job)}
+                    >
+                      Remove
                     </Button>
                   </TableCell>
                 </TableRow>

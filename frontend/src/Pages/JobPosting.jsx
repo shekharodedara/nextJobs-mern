@@ -121,7 +121,7 @@ function JobPosting() {
       const res = await companyService.generateJobDescription(formData);
 
       setGeneratingDescription(false);
-      setFormData({ ...formData, description: res.data.data });
+      setFormData({ ...formData, description: res?.data?.data });
     } catch (error) {
       if (error.response.data.message.includes("Quota exceeded")) {
         setDialog({
@@ -135,7 +135,7 @@ function JobPosting() {
         setDialog({
           isOpen: true,
           title: "Error genetating job description",
-          message: error.response.data.message,
+          message: error?.response?.data?.message,
           buttonText: "OK",
         });
       }
@@ -165,7 +165,7 @@ function JobPosting() {
       setDialog({
         isOpen: true,
         title: "Error Posting Job",
-        message: "error",
+        message: error?.response?.data?.message,
         buttonText: "Okay",
       });
     }

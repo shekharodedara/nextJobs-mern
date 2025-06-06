@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { PRODUCTION_URL } from "./constants.js";
 export const app = express();
 app.use(
   cors({

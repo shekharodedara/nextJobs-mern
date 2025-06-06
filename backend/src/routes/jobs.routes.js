@@ -7,6 +7,7 @@ import {
   getJobs,
   ping,
   postJob,
+  removeJob,
   removeSavedJob,
   saveJob,
   sendJobDescription,
@@ -23,6 +24,7 @@ router.route("/auth-ping").get(verifyJWT, authPing);
 router.route("/jobs").get(getJobs);
 router.route("/jobs/:id?").get(getJobById);
 router.route("/jobs").post(verifyJWT, postJob);
+router.route("/remove-job").post(verifyJWT, removeJob);
 router.route("/generate-job-description").post(verifyJWT, sendJobDescription);
 router.route("/apply/:id?").post(verifyJWT, applyForJob);
 router.route("/save/:id?").post(verifyJWT, saveJob);
