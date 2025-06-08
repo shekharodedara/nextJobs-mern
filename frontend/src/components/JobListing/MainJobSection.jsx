@@ -71,7 +71,7 @@ function MainJobSection() {
             <span>{jobs.length} Jobs results</span>
           </div>
           <div>
-            {jobs.map((job) => (
+            {jobs.filter((job) => job.active).map((job) => (
               <JobCard
                 key={job._id}
                 job={job}

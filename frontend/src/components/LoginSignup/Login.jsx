@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/media/JobHunter.png";
+import logo from "../assets/media/NextJobs.png";
 import { userService } from "../../services/userService";
 import useUpdateUserData from "../../hooks/useUpdateUserData";
 
@@ -72,7 +72,7 @@ function Login() {
           <img
             src={logo}
             className="w-10 rounded-lg mr-3"
-            alt="JobHunter Logo"
+            alt="NextJobs Logo"
           />
           / NextJobs
         </Link>

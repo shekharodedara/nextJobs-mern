@@ -184,11 +184,7 @@ const removeJob = asyncHandler(async (req, res, next) => {
     throw new ApiError(404, "Job not found or you are not authorized");
   }
 
-  if (!job.active) {
-    throw new ApiError(400, "Job is already inactive");
-  }
-
-  job.active = false;
+  job.active = !job.active;
   await job.save();
 
   return res.status(200).json(new ApiResponse(200, job, "Job set to inactive successfully"));

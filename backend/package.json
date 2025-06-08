@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/noobnarayan/job-hunter.git"
+    "url": "git+https://github.com/shekharodedara/nextJobs-mern.git"
   },
-  "author": "Narayan Das",
+  "author": "Shekhar Odedara",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/noobnarayan/job-hunter/issues"
+    "url": "https://github.com/shekharodedara/nextJobs-mern/issues"
   },
-  "homepage": "https://github.com/noobnarayan/job-hunter#readme",
+  "homepage": "https://github.com/shekharodedara/nextJobs-mern#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.1",

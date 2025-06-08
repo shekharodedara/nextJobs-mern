@@ -142,10 +142,10 @@ function Dashboard() {
                       View Job
                     </Button>
                     <Button
-                      color="red"
+                      color={job.active ? "red" : "green"}
                       onClick={() => redirectToDetail(job)}
                     >
-                      Remove
+                      {job.active ? "Inactive" : "Active"}
                     </Button>
                   </TableCell>
                 </TableRow>

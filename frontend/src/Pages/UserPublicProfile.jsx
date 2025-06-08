@@ -128,7 +128,7 @@ function UserPublicProfile() {
         )}
         {userDetails?.userProfile?.workExperience.length > 0 && (
           <div>
-            <h3 className="text-gray-500 font-medium ">Work Experience</h3>
+            <h3 className="text-gray-500 font-medium ">Education</h3>
             {userDetails?.userProfile?.education.map((edu) => (
               <div
                 key={edu._id}

@@ -25,7 +25,7 @@ function UserProfile() {
     <div className="mt-20 xl:px-28 px-5">
       <div>
         <div>
-          <h2 className="font-medium text-4xl">Edit your Jobhunter profile</h2>
+          <h2 className="font-medium text-4xl">Edit your NextJobs profile</h2>
         </div>
         <div className="flex flex-col md:flex-row md:justify-between border-b mt-10 md:items-center pb-3 md:pb-0">
           <div className="flex gap-6 mb-3 md:mb-0 ">
