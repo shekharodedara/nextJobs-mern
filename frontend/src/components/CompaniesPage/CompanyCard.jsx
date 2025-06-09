@@ -67,7 +67,7 @@ function CompanyCard({ bgColor, company }) {
             <h3 className="text-sm font-medium border-gray-600 border w-32 flex items-center justify-center rounded-md text-gray-800 bg-green-300">
               Active Listings
             </h3>
-            {jobListings?.map((listing, index) => (
+            {jobListings.filter((job) => job.active).map((listing, index) => (
               <div
                 className="bg-gray-100 rounded-xl px-3 py-1.5 flex gap-3 items-center hover:cursor-pointer"
                 key={index}

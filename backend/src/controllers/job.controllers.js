@@ -35,7 +35,7 @@ const getJobs = asyncHandler(async (req, res) => {
   // }
 
   if (req.query.search) {
-    query.description = { $regex: req.query.search, $options: "i" };
+    query.title = { $regex: req.query.search, $options: "i" };
   }
 
   // Date posted filter
@@ -342,7 +342,7 @@ const getCompanies = asyncHandler(async (req, res) => {
   for (let company of companies) {
     for (let i = 0; i < company.userProfile.jobListings.length; i++) {
       const job = await Job.findById(company.userProfile.jobListings[i]).select(
-        "title location _id"
+        "title location _id active"
       );
       company.userProfile.jobListings[i] = job;
     }
@@ -363,7 +363,7 @@ const getSavedJobs = asyncHandler(async (req, res) => {
         path: "employer",
         select: "userProfile.companyLogo  userProfile.companyName",
       })
-      .select("salaryRange _id title location");
+      .select("salaryRange _id title location active");
     savedJobs[i] = job;
   }
   res

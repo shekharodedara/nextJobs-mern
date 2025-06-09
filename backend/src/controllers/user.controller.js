@@ -290,7 +290,6 @@ const addSkill = asyncHandler(async (req, res) => {
   await user.save();
 
   const updatedUser = await User.findById(req.user._id);
-  console.log(updatedUser.userProfile.skills);
   return res
     .status(200)
     .json(
@@ -323,21 +322,49 @@ const removeSkill = asyncHandler(async (req, res) => {
 
 const updateResume = asyncHandler(async (req, res) => {
   const { resume } = req.body;
-  const { role } = req.user;
-  if (role !== "jobSeeker") {
+  if (req.user.role !== "jobSeeker") {
     throw new ApiError(401, "You are not authorized to perform this action");
   }
   if (!resume) {
     throw new ApiError(400, "Resume is required");
   }
-
   const user = await User.findById(req.user._id);
   user.userProfile.resume = resume;
   user.markModified("userProfile.resume");
   await user.save();
-  return res
-    .status(200)
-    .json(new ApiResponse(200, {}, "Resume updated successfully"));
+  return res.status(200).json(new ApiResponse(200, {}, "Resume updated successfully"));
+});
+
+const updateResumeFile = asyncHandler(async (req, res) => {
+  const resumeFileLocalPath = req.file?.path;
+  if (!resumeFileLocalPath) {
+    throw new ApiError(400, "Resume file is missing");
+  }
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+  if (user.role !== "jobSeeker") {
+    throw new ApiError(401, "You are not authorized to perform this action");
+  }
+  const oldResumeUrl = user.userProfile?.resume;
+  const uploadResult = await uploadOnCloudinary(resumeFileLocalPath);
+  if (!uploadResult?.secure_url) {
+    throw new ApiError(500, "Error while uploading resume file");
+  }
+  user.userProfile.resume = uploadResult.secure_url;
+  user.markModified("userProfile.resume");
+  await user.save();
+  if (oldResumeUrl) {
+    try {
+      const urlParts = oldResumeUrl.split("/");
+      const filenameWithExt = urlParts[urlParts.length - 1];
+      const publicId = filenameWithExt.split(".")[0];
+      await deleteFromCloudinary(publicId);
+    } catch {}
+  }
+  const updatedUser = await User.findById(req.user._id).select("-password");
+  return res.status(200).json(new ApiResponse(200, updatedUser, "Resume uploaded successfully"));
 });
 
 const userPublicProfile = asyncHandler(async (req, res) => {
@@ -365,5 +392,6 @@ export {
   addSkill,
   removeSkill,
   updateResume,
+  updateResumeFile,
   userPublicProfile,
 };

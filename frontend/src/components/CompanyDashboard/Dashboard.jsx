@@ -41,28 +41,17 @@ function Dashboard() {
     }
   };
 
-  // const navigate = useNavigate();
-  const redirectToDetail = async (job) => {
-        try {
-          const res = await companyService.removeJob(job);
-          fetchData();
-          console.log(res)
-          // setDialog({
-          //   isOpen: true,
-          //   title: "Job Posting Successful",
-          //   message: "Your job posting has been submitted successfully.",
-          //   buttonText: "Got it!",
-          //   ondblclick: () => navigate("/dashboard/home"),
-          // });
-        } catch (error) {
-          console.log(error)
-          // setDialog({
-          //   isOpen: true,
-          //   title: "Error Removing Job",
-          //   message: "error",
-          //   buttonText: "Okay",
-          // });
-        }
+  const navigate = useNavigate();
+  const redirectToDetail = (id) => {
+    navigate(`/job/${id}`);
+  };
+  const activeInactiveJob = async (job) => {
+    try {
+      const res = await companyService.removeJob(job);
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -83,7 +72,7 @@ function Dashboard() {
             <i className="fa-solid fa-users"></i>
           </div>
           <div className="flex flex-col justify-center ">
-            <p className="font-semibold text-lg">{applicants.length}</p>
+            <p className="font-semibold text-lg">{applicants.length || 0}</p>
             <p className="text-xs text-gray-500">New Applications</p>
           </div>
         </div>
@@ -92,7 +81,7 @@ function Dashboard() {
             <i className="fa-regular fa-rectangle-xmark"></i>
           </div>
           <div className="flex flex-col justify-center ">
-            <p className="font-semibold text-lg">124</p>
+            <p className="font-semibold text-lg">10</p>
             <p className="text-xs text-gray-500">Closed Jobs</p>
           </div>
         </div>
@@ -126,9 +115,7 @@ function Dashboard() {
               {jobData.map((job, index) => (
                 <TableRow key={index}>
                   <TableCell>{job.title}</TableCell>
-                  <TableCell>
-                    <TableCell>{job?.applicants.length}</TableCell>
-                  </TableCell>
+                  <TableCell>{job?.applicants.length}</TableCell>
                   <TableCell>
                     <Badge color={job.active === true ? "emerald" : "red"}>
                       {job.active ? "active" : "inactive"}
@@ -136,14 +123,15 @@ function Dashboard() {
                   </TableCell>
                   <TableCell>
                     <Button
-                      color="black" className="mr-4"
+                      color="black"
+                      className="mr-4"
                       onClick={() => redirectToDetail(job._id)}
                     >
                       View Job
                     </Button>
                     <Button
                       color={job.active ? "red" : "green"}
-                      onClick={() => redirectToDetail(job)}
+                      onClick={() => activeInactiveJob(job)}
                     >
                       {job.active ? "Inactive" : "Active"}
                     </Button>

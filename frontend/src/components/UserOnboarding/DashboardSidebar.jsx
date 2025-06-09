@@ -134,7 +134,14 @@ function DashboardSidebar() {
           </span>
         </div>
       </div>
-      <div className="ie-userMobile p-1 xl:hidden"></div>
+      <div className="p-1 xl:hidden flex justify-center mt-auto">
+        <button
+          onClick={handleLogout}
+          className="text-xs font-medium text-gray-700 bg-gray-100 px-3 py-1 rounded-full hover:bg-gray-50 hover:text-red-700"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }

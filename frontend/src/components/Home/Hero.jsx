@@ -1,23 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import heroImage from "./assets/media/heroImage.png";
-import { userService } from "../../services/userService";
 
-function Hero() {
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const user = await userService.getCurrentUser();
-        setUserData(user);
-      } catch (err) {
-        console.error('Error fetching user:', err);
-      }
-    };
-    fetchUser();
-  }, []);
-
+function Hero({ userData }) {
   return (
     <div className="md:flex ">
       <div className=" md:w-1/2 bg-gray-200 ">
@@ -36,10 +21,22 @@ function Hero() {
           </p>
         </div>
         <div className="flex flex-col md:flex-row gap-9 md:gap-14 items-center mt-10 md:mt-8 md:pl-20 pl-0">
-          <Link to={userData?.role ? "/jobs" : "/signup"}>
+          <Link
+            to={
+              userData?.role
+                ? userData.role === "employer"
+                  ? "/dashboard/applications"
+                  : "/jobs"
+                : "/signup"
+            }
+          >
             {
               <button className="py-3 px-5 border-2 border-black font-semibold text-gray-900 hover:scale-105 shadow-heroButton duration-150">
-                {userData?.role ? "Find Jobs" : "Join Our Platform"}
+                {userData?.role
+                  ? userData.role === "employer"
+                    ? "View Applications"
+                    : "Find Jobs"
+                  : "Join Our Platform"}
                 <span className="ml-6">
                   <i className="fa-solid fa-arrow-right"></i>
                 </span>

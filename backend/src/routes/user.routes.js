@@ -10,6 +10,7 @@ import {
   removeSkill,
   updateProfilePicture,
   updateResume,
+  updateResumeFile,
   updateUserProfile,
   userPublicProfile,
 } from "../controllers/user.controller.js";
@@ -31,6 +32,7 @@ router
 router.route("/add-skill").post(verifyJWT, addSkill);
 router.route("/remove-skill").post(verifyJWT, removeSkill);
 router.route("/resume").post(verifyJWT, updateResume);
+router.route("/resume/upload").post(verifyJWT, upload.single('resumeFile'), updateResumeFile);
 router.route("/saved-jobs").get(verifyJWT, getSavedJobs);
 router.route("/public-profile/:id?").get(userPublicProfile);
 

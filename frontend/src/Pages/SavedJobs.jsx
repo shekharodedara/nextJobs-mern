@@ -26,7 +26,6 @@ function SavedJobs() {
   const removeJob = async (id) => {
     try {
       const res = await userService.removeSavedJob(id);
-      console.log(res);
       fetchData();
     } catch (error) {
       console.log(error);
@@ -38,7 +37,7 @@ function SavedJobs() {
       <h1 className="text-2xl font-bold mb-4">Saved Jobs</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {data.length > 0 ? (
-          data.map((job, index) => (
+          data.filter((job) => job.active).map((job, index) => (
             <div
               key={index}
               className="border p-4 rounded flex flex-col md:flex-row justify-between items-start md:items-center hover:cursor-pointer"

@@ -2,7 +2,7 @@ import React from "react";
 import happyPeople from "../assets/media/happyRecruiters.svg";
 import { Link } from "react-router-dom";
 
-function HomeRecruiters() {
+function HomeRecruiters({ userData }) {
   return (
     <div className="md:flex px-7 md:px-10 py-8 font-Poppins">
       <div className="md:w-1/2 px-3 md:px-16">
@@ -53,16 +53,16 @@ function HomeRecruiters() {
 
         {/* Buttons */}
         <div className="my-10">
-          <Link to="/login">
+          <Link to="#">
             <button className="border border-gray-300 text-black font-medium py-2 px-5 rounded-xl md:shadow hover:bg-green-300 hover:border-green-500 duration-500 mr-5 md:hover:scale-105">
               Learn more
             </button>
           </Link>
-          <Link to="/signup">
+          {!userData?.role && <Link to="/signup">
             <button className="bg-black text-white font-medium py-2 px-5 rounded-xl  hover:bg-green-700 duration-500 md:hover:scale-105 md:shadow">
               Sign up now
             </button>
-          </Link>
+          </Link>}
         </div>
       </div>
       {/* Right */}

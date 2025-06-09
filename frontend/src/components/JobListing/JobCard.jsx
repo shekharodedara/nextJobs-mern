@@ -113,12 +113,14 @@ function JobCard({ job, redirectToDetail }) {
           </div>
         </div>
         {/* Bottom */}
-        <div className="ml-5 md:ml-10 text-gray-500 text-[.9rem]">
-          <ul className="list-disc">
-            <li>{responsibilities[0]}</li>
-            <li>{responsibilities[1]}</li>
-          </ul>
-        </div>
+        {responsibilities && (
+          <div className="ml-5 md:ml-10 text-gray-500 text-[.9rem]">
+            <ul className="list-disc">
+              {responsibilities[0] && <li>{responsibilities[0]}</li>}
+              {responsibilities[1] && <li>{responsibilities[1]}</li>}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

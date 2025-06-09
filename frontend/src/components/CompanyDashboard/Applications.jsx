@@ -24,7 +24,6 @@ function Applications() {
     setLoading(true);
     try {
       const res = await companyService.getAllApplications();
-      console.log("Called again");
       setApplicants(res);
     } catch (error) {
       console.log(error);

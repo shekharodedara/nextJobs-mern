@@ -121,12 +121,12 @@ function Login() {
                   <span className="text-red-600 text-sm ml-2">
                     {errorMessage}
                   </span>
-                  <a
+                  {/* <a
                     href="#"
                     className="text-right font-light text-black cursor-pointer mb-3 underline"
                   >
                     Forget Password?
-                  </a>
+                  </a> */}
                 </div>
 
                 <button className="bg-black rounded-md text-white font-normal text-sm h-11">

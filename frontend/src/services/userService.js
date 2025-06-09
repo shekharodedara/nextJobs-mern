@@ -10,6 +10,7 @@ export const userService = {
   addSkill,
   removeSkill,
   updateResume,
+  uploadResumeFile,
   saveJob,
   applyForJob,
   removeSavedJob,
@@ -56,6 +57,12 @@ async function removeSkill(skill) {
 
 async function updateResume(resume) {
   return apiCall("post", "/users/resume", { resume });
+}
+
+async function uploadResumeFile(formData) {
+  return apiCall("post", "/users/resume/upload", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 }
 
 async function saveJob(id) {

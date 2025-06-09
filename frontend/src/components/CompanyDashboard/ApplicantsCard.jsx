@@ -36,7 +36,6 @@ function ApplicantsCard({ isShortlisted, data, fetchApplications }) {
         jobId: jobDetails._id,
         applicantId: applicantProfile._id,
       });
-      console.log(res);
       fetchApplications();
     } catch (error) {
       console.log(error);
@@ -49,7 +48,6 @@ function ApplicantsCard({ isShortlisted, data, fetchApplications }) {
         jobId: jobDetails._id,
         applicantId: applicantProfile._id,
       });
-      console.log(res);
       fetchApplications();
     } catch (error) {
       console.log(error);
@@ -62,7 +60,6 @@ function ApplicantsCard({ isShortlisted, data, fetchApplications }) {
         jobId: jobDetails._id,
         applicantId: applicantProfile._id,
       });
-      console.log(res);
       fetchApplications();
     } catch (error) {
       console.log(error);

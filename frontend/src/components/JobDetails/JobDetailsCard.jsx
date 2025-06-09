@@ -81,7 +81,6 @@ function JobDetailsCard({ jobData }) {
     setApplying(true);
     try {
       const res = await userService.applyForJob(jobData._id);
-      console.log(res);
       setDialog({
         isOpen: true,
         title: "Job Application Successful",

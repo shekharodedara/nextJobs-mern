@@ -38,7 +38,6 @@ function MainJobSection() {
   };
 
   useEffect(() => {
-    console.log(selectedLocation);
     const debounceTimer = setTimeout(() => {
       getJobs({ ...filters, search, location: selectedLocation });
     }, 300);

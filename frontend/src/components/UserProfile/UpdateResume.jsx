@@ -6,9 +6,10 @@ import { useSelector } from "react-redux";
 import useUpdateUserData from "../../hooks/useUpdateUserData";
 
 function UpdateResume() {
+  const [resumeFile, setResumeFile] = useState(null);
   const [resumeLink, setResumeLink] = useState("");
   const [resume, setResume] = useState("");
-  const [updating, setUpdating] = useState(null);
+  const [updating, setUpdating] = useState(false);
 
   const updateUserData = useUpdateUserData();
 
@@ -16,7 +17,7 @@ function UpdateResume() {
 
   useEffect(() => {
     if (userData?.userProfile?.resume) {
-      setResume(userData?.userProfile?.resume);
+      setResume(userData.userProfile.resume);
     }
   }, [userData]);
 
@@ -28,14 +29,26 @@ function UpdateResume() {
     event.preventDefault();
     try {
       setUpdating(true);
-      const res = await userService.updateResume(resumeLink);
+      if (resumeLink) {
+        await userService.updateResume(resumeLink);
+      } else if (resumeFile) {
+        const formData = new FormData();
+        formData.append("resumeFile", resumeFile);
+        await userService.uploadResumeFile(formData);
+      } else {
+        throw new Error(
+          "Please provide a resume link or upload a resume file."
+        );
+      }
+
       updateUserData();
-      setUpdating(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    } finally {
       setUpdating(false);
+      setResumeLink("");
+      setResumeFile(null);
     }
-    setResumeLink("");
   };
 
   return (
@@ -45,18 +58,50 @@ function UpdateResume() {
           Upload your recent resume or CV
         </h2>
 
-        <form className="space-y-4" onSubmit={handleSubmit}>
-          <InputField
-            label="Resume link"
-            id="resumeLink"
-            value={resumeLink}
-            onChange={handleInputChange}
-            isRequired={true}
-            placeholder="Paste your Google Drive link here"
-            description="Please ensure that your Google Drive link is accessible to everyone."
-          />
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          <div className="space-y-1">
+            <InputField
+              label="Resume link"
+              id="resumeLink"
+              value={resumeLink || ""}
+              onChange={handleInputChange}
+              isRequired={!resumeFile}
+              placeholder="Paste your Google Drive link here"
+              description="Make sure the Google Drive link is public and accessible."
+            />
+          </div>
 
-          <div className="flex justify-end my-2">
+          <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
+            <div className="h-px w-full bg-gray-300"></div>
+            <span>OR</span>
+            <div className="h-px w-full bg-gray-300"></div>
+          </div>
+
+          <div className="space-y-1">
+            <label
+              htmlFor="resumeFile"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Upload resume file (PDF only)
+            </label>
+            <input
+              id="resumeFile"
+              type="file"
+              accept=".pdf"
+              onChange={(e) => setResumeFile(e.target.files[0])}
+              className="block w-full text-sm text-gray-700
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-full file:border-0
+                file:bg-gray-100 file:text-gray-700
+                hover:file:bg-gray-200
+                file:font-medium"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Max file size: 5MB. PDF only.
+            </p>
+          </div>
+
+          <div className="flex justify-end">
             <SubmissionButton
               type="submit"
               label={updating ? "Updating..." : "Update"}

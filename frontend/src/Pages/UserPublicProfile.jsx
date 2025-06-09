@@ -126,7 +126,7 @@ function UserPublicProfile() {
             ))}
           </div>
         )}
-        {userDetails?.userProfile?.workExperience.length > 0 && (
+        {userDetails?.userProfile?.education.length > 0 && (
           <div>
             <h3 className="text-gray-500 font-medium ">Education</h3>
             {userDetails?.userProfile?.education.map((edu) => (
