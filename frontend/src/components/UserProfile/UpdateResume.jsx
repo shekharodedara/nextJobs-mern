@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import InputField from "../Common/FormComponents/InputField";
 import SubmissionButton from "../Common/Buttons/SubmissionButton";
 import { userService } from "../../services/userService";
@@ -10,6 +10,7 @@ function UpdateResume() {
   const [resumeLink, setResumeLink] = useState("");
   const [resume, setResume] = useState("");
   const [updating, setUpdating] = useState(false);
+  const fileInputRef = useRef(null);
 
   const updateUserData = useUpdateUserData();
 
@@ -40,7 +41,6 @@ function UpdateResume() {
           "Please provide a resume link or upload a resume file."
         );
       }
-
       updateUserData();
     } catch (error) {
       console.error(error);
@@ -48,6 +48,7 @@ function UpdateResume() {
       setUpdating(false);
       setResumeLink("");
       setResumeFile(null);
+      if (fileInputRef.current) fileInputRef.current.value = "";
     }
   };
 
@@ -57,7 +58,6 @@ function UpdateResume() {
         <h2 className="mb-5 text-lg sm:text-xl md:text-2xl font-bold text-gray-700">
           Upload your recent resume or CV
         </h2>
-
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-1">
             <InputField
@@ -70,13 +70,6 @@ function UpdateResume() {
               description="Make sure the Google Drive link is public and accessible."
             />
           </div>
-
-          <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
-            <div className="h-px w-full bg-gray-300"></div>
-            <span>OR</span>
-            <div className="h-px w-full bg-gray-300"></div>
-          </div>
-
           <div className="space-y-1">
             <label
               htmlFor="resumeFile"
@@ -88,6 +81,7 @@ function UpdateResume() {
               id="resumeFile"
               type="file"
               accept=".pdf"
+              ref={fileInputRef}
               onChange={(e) => setResumeFile(e.target.files[0])}
               className="block w-full text-sm text-gray-700
                 file:mr-4 file:py-2 file:px-4
@@ -100,7 +94,35 @@ function UpdateResume() {
               Max file size: 5MB. PDF only.
             </p>
           </div>
-
+          {resume && (
+            <div className="mt-4">
+              {resume.includes("res.cloudinary.com") ? (
+                <div className="inline-flex justify-center items-center bg-green-200 py-1 px-3 rounded">
+                  <a
+                    href={resume.replace("/upload/", "/upload/fl_attachment/")}
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-green-700 text-xs font-semibold no-underline hover:cursor-pointer"
+                  >
+                    Download Resume ✨
+                  </a>
+                </div>
+              ) : (
+                <div className="text-sm text-gray-600 break-words">
+                  Resume Link:{" "}
+                  <a
+                    href={resume}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-green-600 underline"
+                  >
+                    {resume}
+                  </a>
+                </div>
+              )}
+            </div>
+          )}
           <div className="flex justify-end">
             <SubmissionButton
               type="submit"
@@ -109,23 +131,6 @@ function UpdateResume() {
             />
           </div>
         </form>
-
-        {resume && (
-          <div className="mt-10 p-3 bg-gray-200 rounded shadow-md">
-            <h3 className="text-lg font-bold text-gray-700">
-              Current Resume Link:
-            </h3>
-            <a
-              href={resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-green-600 underline flex items-center my-2 break-all"
-            >
-              <i className="fa-solid fa-arrow-up-right-from-square mr-2.5"></i>
-              {resume}
-            </a>
-          </div>
-        )}
       </div>
     </div>
   );

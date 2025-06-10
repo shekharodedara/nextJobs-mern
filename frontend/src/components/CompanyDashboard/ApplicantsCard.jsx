@@ -108,10 +108,28 @@ function ApplicantsCard({ isShortlisted, data, fetchApplications }) {
 
           {resume && (
             <div className="flex justify-center items-center bg-green-200 py-1 px-1.5 rounded">
-              <span className="text-green-700 text-[0.67rem] lg:text-xs font-semibold hover:cursor-pointer">
-                <a href={resume} target="_blank">
-                  Resume ✨
-                </a>
+              <span
+                onClick={() => {
+                  const isCloudinary = resume.includes("cloudinary");
+                  const url = isCloudinary
+                    ? resume.replace("/upload/", "/upload/fl_attachment/")
+                    : resume;
+
+                  const link = document.createElement("a");
+                  link.href = url;
+                  link.target = "_blank";
+                  if (isCloudinary) {
+                    link.setAttribute("download", "Resume.pdf");
+                  }
+                  document.body.appendChild(link);
+                  link.click();
+                  link.remove();
+                }}
+                className="text-green-700 text-[0.67rem] lg:text-xs font-semibold hover:cursor-pointer"
+              >
+                {resume.includes("cloudinary")
+                  ? "Download Resume ✨"
+                  : "Resume ✨"}
               </span>
             </div>
           )}
