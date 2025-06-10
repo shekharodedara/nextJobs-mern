@@ -53,7 +53,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(409, "User already exists");
   }
 
-  const username = email.split("@")[0];
+  const username = email.replace("@", "-").split(".")[0];
   const user = await User.create({
     email: email.toLowerCase(),
     username: username.toLowerCase(),

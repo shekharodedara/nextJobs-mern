@@ -25,8 +25,14 @@ function AllRoutes() {
       <Route path="/jobs" element={<JobListing />} />
       <Route path="/job/:id" element={<JobDetails />} />
       <Route path="/companies" element={<CompaniesPage />} />
-      <Route path="/user/:id" element={<UserPublicProfile />} />
-
+      <Route
+        path="/user/:id"
+        element={
+          <PrivateRoutes>
+            <UserPublicProfile />
+          </PrivateRoutes>
+        }
+      />
       <Route
         path="/dashboard/*"
         element={
@@ -59,9 +65,30 @@ function AllRoutes() {
           </PrivateRoutes>
         }
       />
-      <Route path="/user-onboarding" element={<UserOnboaring />} />
-      <Route path="/company-onboarding" element={<CompanyOnboarding />} />
-      <Route path="/saved-jobs" element={<SavedJobs />} />
+      <Route
+        path="/user-onboarding"
+        element={
+          <PrivateRoutes>
+            <UserOnboaring />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/company-onboarding"
+        element={
+          <PrivateRoutes>
+            <CompanyOnboarding />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/saved-jobs"
+        element={
+          <PrivateRoutes>
+            <SavedJobs />
+          </PrivateRoutes>
+        }
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

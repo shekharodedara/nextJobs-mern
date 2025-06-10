@@ -70,6 +70,24 @@ function UpdateResume() {
               description="Make sure the Google Drive link is public and accessible."
             />
           </div>
+          {resume && !resume.includes("res.cloudinary.com") && (
+            <div className="mt-4 text-sm text-gray-600 break-words">
+              Resume Link:{" "}
+              <a
+                href={resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-600 underline"
+              >
+                {resume}
+              </a>
+            </div>
+          )}
+          <div className="flex items-center my-4">
+            <hr className="flex-grow border-t border-gray-300" />
+            <span className="mx-2 text-sm text-gray-500">or</span>
+            <hr className="flex-grow border-t border-gray-300" />
+          </div>
           <div className="space-y-1">
             <label
               htmlFor="resumeFile"
@@ -94,33 +112,17 @@ function UpdateResume() {
               Max file size: 5MB. PDF only.
             </p>
           </div>
-          {resume && (
-            <div className="mt-4">
-              {resume.includes("res.cloudinary.com") ? (
-                <div className="inline-flex justify-center items-center bg-green-200 py-1 px-3 rounded">
-                  <a
-                    href={resume.replace("/upload/", "/upload/fl_attachment/")}
-                    download
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-green-700 text-xs font-semibold no-underline hover:cursor-pointer"
-                  >
-                    Download Resume ✨
-                  </a>
-                </div>
-              ) : (
-                <div className="text-sm text-gray-600 break-words">
-                  Resume Link:{" "}
-                  <a
-                    href={resume}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-green-600 underline"
-                  >
-                    {resume}
-                  </a>
-                </div>
-              )}
+          {resume?.includes("res.cloudinary.com") && (
+            <div className="mt-4 inline-flex justify-center items-center bg-green-200 py-1 px-3 rounded">
+              <a
+                href={resume.replace("/upload/", "/upload/fl_attachment/")}
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-700 text-xs font-semibold no-underline hover:cursor-pointer"
+              >
+                Download Resume ✨
+              </a>
             </div>
           )}
           <div className="flex justify-end">

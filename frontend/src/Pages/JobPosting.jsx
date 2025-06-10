@@ -35,7 +35,7 @@ function JobPosting() {
     employer: "",
     benefits: [],
     applicationDeadline: "",
-    workMode: "",
+    workMode: "Onsite",
     additionalRequirements: [],
     urgent: false,
     numberOfOpenings: 0,
@@ -161,7 +161,7 @@ function JobPosting() {
         onClose: () => navigate("/dashboard/home"),
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setDialog({
         isOpen: true,
         title: "Error Posting Job",
@@ -327,7 +327,9 @@ function JobPosting() {
             </div>
 
             <div className="flex flex-col space-y-2">
-              <span className="font-semibold text-lg">Work Mode</span>
+              <span className="font-semibold text-lg">
+                Work Mode<span className="text-gray-500">*</span>
+              </span>
               <span className="text-sm text-gray-500">
                 Please select your preferred work mode
               </span>

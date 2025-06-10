@@ -18,10 +18,10 @@ function SocialProfileForm({ userData }) {
     if (userData) {
       setFormData({
         ...formData,
-        website: userData?.userProfile?.socialProfiles?.portfolioWebsite,
-        linkedin: userData?.userProfile?.socialProfiles?.linkedin,
-        twitter: userData?.userProfile?.socialProfiles?.twitter,
-        github: userData?.userProfile?.socialProfiles?.github,
+        website: userData?.userProfile?.socialProfiles?.portfolioWebsite || "",
+        linkedin: userData?.userProfile?.socialProfiles?.linkedin || "",
+        twitter: userData?.userProfile?.socialProfiles?.twitter || "",
+        github: userData?.userProfile?.socialProfiles?.github || "",
       });
     }
   }, [userData]);
@@ -60,7 +60,6 @@ function SocialProfileForm({ userData }) {
 
   const handleCancel = () => {
     setFormData(initialFormData);
-    console.log(formData);
   };
   return (
     <div>

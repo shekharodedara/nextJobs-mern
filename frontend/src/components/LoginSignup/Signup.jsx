@@ -169,9 +169,10 @@ function Signup() {
 
                 <label className=" font-semibold">Email Address:</label>
                 <input
-                  type="text"
+                  type="email"
                   name="email"
                   required
+                  pattern="^[a-zA-Z0-9](?!.*[._%+-]{2})[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9-]{3,}\.[a-zA-Z]{2,}$"
                   value={formData.email}
                   onChange={handleInputChange}
                   className="rounded h-10 text-base pl-5 mb-3 border-x border-y border-gray-400"
