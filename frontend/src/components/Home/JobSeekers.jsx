@@ -11,7 +11,6 @@ function JobSeekers({ userData }) {
         </div>
       </div>
 
-      {/* Right */}
       <div className="md:w-1/2 px-5 md:px-16">
         <div>
           <p className="text-xl font-medium my-10">GOT TALENT?</p>
@@ -61,18 +60,19 @@ function JobSeekers({ userData }) {
           </div>
         </div>
 
-        {/* Buttons */}
         <div className="my-10">
           <Link to="#">
             <button className="border border-gray-300 text-black font-medium py-2 px-5 rounded-xl md:shadow hover:bg-green-300 hover:border-green-500 duration-500 mr-5 md:hover:scale-105">
               Learn more
             </button>
           </Link>
-          {!userData?.role && <Link to="/signup">
-            <button className="bg-black text-white font-medium py-2 px-5 rounded-xl  hover:bg-green-700 duration-500 md:hover:scale-105 md:shadow">
-              Sign up now
-            </button>
-          </Link>}
+          {!userData?.role && (
+            <Link to="/signup">
+              <button className="bg-black text-white font-medium py-2 px-5 rounded-xl  hover:bg-green-700 duration-500 md:hover:scale-105 md:shadow">
+                Sign up now
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

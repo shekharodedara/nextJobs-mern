@@ -51,7 +51,7 @@ function DashboardSidebar() {
       .logout()
       .then(() => {
         dispatch(logout());
-        navigate("/");
+        navigate("/home");
       })
       .catch((error) => {
         console.log(error);
@@ -62,7 +62,7 @@ function DashboardSidebar() {
     <div className="sticky top-0 flex h-screen w-full flex-col justify-between border-r border-gray-200 bg-white px-1 py-5 xl:py-12 xl:px-2">
       <div className="ie-logo px-3 py-0 text-center xl:text-left">
         <div className="font-semibold text-xl cursor-pointer flex items-center text-gray-800">
-          <Link to="/" className="flex items-center font-Poppins">
+          <Link to="/home" className="flex items-center font-Poppins">
             <img
               src={logo}
               className="w-10 rounded-lg mr-3"

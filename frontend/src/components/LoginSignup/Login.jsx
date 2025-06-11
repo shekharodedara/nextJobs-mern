@@ -44,7 +44,7 @@ function Login() {
           await updateUser();
           if (userData.role === "jobSeeker") {
             if (userData.userProfile.doneOnboarding === true) {
-              navigate("/");
+              navigate("/home");
             } else {
               navigate("/user-onboarding");
             }
@@ -68,7 +68,7 @@ function Login() {
   return (
     <div>
       <div className="hidden font-semibold text-xl cursor-pointer md:flex items-center text-gray-800 px-16 mt-3">
-        <Link to="/" className="flex items-center font-Poppins">
+        <Link to="/home" className="flex items-center font-Poppins">
           <img
             src={logo}
             className="w-10 rounded-lg mr-3"

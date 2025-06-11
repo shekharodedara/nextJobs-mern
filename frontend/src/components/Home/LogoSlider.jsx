@@ -1,130 +1,39 @@
 import React from "react";
 import "./LogoSlider.css";
 import { Icon } from "@iconify/react";
+
+const logos = [
+  "logos:google",
+  "https://logo.clearbit.com/eleks.com",
+  "logos:microsoft",
+  "logos:youtube",
+  "https://logo.clearbit.com/iflair.com",
+  "logos:netflix",
+  "logos:airbnb",
+  "logos:behance",
+  "logos:bitrise",
+  "logos:envato",
+  "logos:webflow",
+  "logos:wordpress"
+];
+
 function LogoSlider() {
   return (
     <div className="silder">
       <ul className="brands">
-        <li className="brand-logo">
-          <Icon icon="logos:google" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:microsoft" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:youtube" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:netflix" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:airbnb" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:behance" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:bitrise" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:envato" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:webflow" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:wordpress" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:google" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:microsoft" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:youtube" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:netflix" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:airbnb" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:behance" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:bitrise" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:envato" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:webflow" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:wordpress" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:google" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:microsoft" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:youtube" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:netflix" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:airbnb" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:behance" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:bitrise" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:envato" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:webflow" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:wordpress" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:google" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:microsoft" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:youtube" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:netflix" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:airbnb" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:behance" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:bitrise" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:envato" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:webflow" />
-        </li>
-        <li className="brand-logo">
-          <Icon icon="logos:wordpress" />
-        </li>
+        {logos.map((logo, idx) => (
+          <li className="brand-logo" key={idx}>
+            {logo.startsWith("http") ? (
+              <img
+                src={logo}
+                alt="Company logo"
+                style={{ height: "55px", width: "auto" }}
+              />
+            ) : (
+              <Icon icon={logo} style={{ fontSize: "30px" }} />
+            )}
+          </li>
+        ))}
       </ul>
     </div>
   );

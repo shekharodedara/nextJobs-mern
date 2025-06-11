@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function NotFound() {
   const navigate = useNavigate();
   const redirectToHome = () => {
-    navigate("/");
+    navigate("/home");
   };
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">

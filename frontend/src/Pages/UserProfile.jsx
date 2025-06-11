@@ -10,7 +10,7 @@ function UserProfile() {
   const navigate = useNavigate();
 
   if (!userData || userData.role === "employer") {
-    return <Navigate to="/" />;
+    return <Navigate to="/home" />;
   }
 
   const switchSection = (section) => {

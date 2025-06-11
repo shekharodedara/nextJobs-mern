@@ -9,7 +9,7 @@ function Navbar() {
   const navLinks = [
     {
       title: "Home",
-      path: "/",
+      path: "/home",
     },
     {
       title: "Find Jobs",
@@ -54,7 +54,7 @@ function Navbar() {
     <div className="border-b w-full fixed top-0 left-0 font-Nunito z-50">
       <div className="lg:flex items-center justify-between bg-white py-2.5 lg:px-10 px-7">
         <div className="font-semibold text-xl cursor-pointer flex items-center text-gray-800">
-          <Link to="/" className="flex items-center font-Poppins">
+          <Link to="/home" className="flex items-center font-Poppins">
             <img
               src={logo}
               className="w-10 rounded-lg mr-3"
@@ -86,6 +86,9 @@ function Navbar() {
               >
                 <NavLink
                   to={link.path}
+                  {...(link.path === "/home"
+                    ? { state: { userData } }
+                    : {})}
                   className={({ isActive }) =>
                     isActive
                       ? activeStyle

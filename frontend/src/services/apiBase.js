@@ -7,6 +7,7 @@ const instance = axios.create({
 });
 
 export async function apiCall(method, url, data) {
+  // eslint-disable-next-line no-useless-catch
   try {
     const res = await instance[method](url, data);
     return url === "/users/signup" ||
@@ -15,8 +16,7 @@ export async function apiCall(method, url, data) {
       ? res
       : res.data.data;
   } catch (error) {
-    console.error(error);
-    throw error;
+    // throw error;
   }
 }
 

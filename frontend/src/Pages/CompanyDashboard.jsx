@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 function CompanyDashboard() {
   const { status, userData } = useSelector((store) => store.auth);
   if (userData.role !== "employer") {
-    return <Navigate to="/" />;
+    return <Navigate to="/home" />;
   }
   return (
     <div className="flex">
