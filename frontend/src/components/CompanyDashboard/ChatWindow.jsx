@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 
 const ChatWindow = ({
   messages,
@@ -10,6 +10,7 @@ const ChatWindow = ({
   selectedUserName,
   selectedUserProfile,
   currentUserProfile,
+  messagesEndRef,
 }) => {
   return (
     <div className={`flex flex-col w-full h-full ${bgColor} p-4`}>
@@ -23,15 +24,16 @@ const ChatWindow = ({
       </div>
 
       <div className="flex-grow overflow-y-auto">
-        {messages && messages.map((msg) => {
+        {messages.map((msg, i) => {
+          if (!msg.text) return null; // Skip empty messages
+
           const isCurrentUser = msg.senderId === currentUserId;
           const profilePic = isCurrentUser ? currentUserProfile : selectedUserProfile;
 
           return (
             <div
-              key={msg._id}
-              className={`flex mb-2 items-center ${isCurrentUser ? "justify-end" : "justify-start"
-                }`}
+              key={i}
+              className={`flex mb-2 items-center ${isCurrentUser ? "justify-end" : "justify-start"}`}
             >
               {!isCurrentUser && (
                 <img
@@ -41,8 +43,7 @@ const ChatWindow = ({
                 />
               )}
               <div
-                className={`p-2 rounded ${isCurrentUser ? "bg-blue-500 text-white" : "bg-gray-200 text-black"
-                  } max-w-xs`}
+                className={`p-2 rounded ${isCurrentUser ? "bg-blue-500 text-white" : "bg-gray-200 text-black"} max-w-xs`}
               >
                 {msg.text}
               </div>
@@ -56,6 +57,7 @@ const ChatWindow = ({
             </div>
           );
         })}
+        <div ref={messagesEndRef} />
       </div>
 
       <form onSubmit={onSend} className="mt-4 flex">
