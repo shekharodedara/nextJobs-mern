@@ -16,6 +16,7 @@ import NotFound from "../components/NotFound";
 import PrivateRoutes from "./PrivateRoutes";
 import SavedJobs from "../Pages/SavedJobs";
 import UserPublicProfile from "../Pages/UserPublicProfile";
+import Messages from "../components/CompanyDashboard/Messages";
 function AllRoutes() {
   return (
     <Routes>
@@ -29,6 +30,7 @@ function AllRoutes() {
       <Route path="/jobs" element={<JobListing />} />
       <Route path="/job/:id" element={<JobDetails />} />
       <Route path="/companies" element={<CompaniesPage />} />
+      <Route path="/notification" element={<PrivateRoutes><Messages /></PrivateRoutes>} />
       <Route
         path="/user/:id"
         element={

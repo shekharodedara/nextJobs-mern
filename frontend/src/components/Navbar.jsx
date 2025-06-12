@@ -74,9 +74,8 @@ function Navbar() {
           ></i>
         </div>
         <ul
-          className={`lg:flex lg:items-center lg:pb-0 pb-12 absolute lg:static bg-white lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 pl-9 transition-all duration-500 ease-in ${
-            open ? "top-20 " : "top-[-490px]"
-          }`}
+          className={`lg:flex lg:items-center lg:pb-0 pb-12 absolute lg:static bg-white lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-20 " : "top-[-490px]"
+            }`}
         >
           {navLinks.map((link, index) => {
             return (
@@ -117,11 +116,11 @@ function Navbar() {
           ) : (
             <>
               <div className="px-20 flex gap-8 items-center justify-center">
-                <div>
+                <Link to="/notification">
                   <span>
-                    <i className="fa-solid fa-bell text-xl text-gray-600"></i>
+                    <i className="fa-solid fa-message text-xl text-gray-600"></i>
                   </span>
-                </div>
+                </Link>
                 <div className="relative shado">
                   <div
                     className="rounded-full h-9 w-9 hover:cursor-pointer overflow-hidden flex justify-center items-center border"
