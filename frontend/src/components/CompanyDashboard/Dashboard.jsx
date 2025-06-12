@@ -102,44 +102,50 @@ function Dashboard() {
           <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold text-lg">
             Job Listings
           </h3>
-          <Table className="mt-5">
-            <TableHead>
-              <TableRow>
-                <TableHeaderCell>Job Title</TableHeaderCell>
-                <TableHeaderCell>Applications</TableHeaderCell>
-                <TableHeaderCell>Status</TableHeaderCell>
-                <TableHeaderCell>View Job</TableHeaderCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {jobData.map((job, index) => (
-                <TableRow key={index}>
-                  <TableCell>{job.title}</TableCell>
-                  <TableCell>{job?.applicants.length}</TableCell>
-                  <TableCell>
-                    <Badge color={job.active === true ? "emerald" : "red"}>
-                      {job.active ? "active" : "inactive"}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      color="black"
-                      className="mr-4"
-                      onClick={() => redirectToDetail(job._id)}
-                    >
-                      View Job
-                    </Button>
-                    <Button
-                      color={job.active ? "red" : "green"}
-                      onClick={() => activeInactiveJob(job)}
-                    >
-                      {job.active ? "Inactive" : "Active"}
-                    </Button>
-                  </TableCell>
+          {jobData?.length ? (
+            <Table className="mt-5">
+              <TableHead>
+                <TableRow>
+                  <TableHeaderCell>Job Title</TableHeaderCell>
+                  <TableHeaderCell>Applications</TableHeaderCell>
+                  <TableHeaderCell>Status</TableHeaderCell>
+                  <TableHeaderCell>View Job</TableHeaderCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHead>
+              <TableBody>
+                {jobData.map((job, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{job.title}</TableCell>
+                    <TableCell>{job?.applicants.length}</TableCell>
+                    <TableCell>
+                      <Badge color={job.active === true ? "emerald" : "red"}>
+                        {job.active ? "active" : "inactive"}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        color="black"
+                        className="mr-4"
+                        onClick={() => redirectToDetail(job._id)}
+                      >
+                        View Job
+                      </Button>
+                      <Button
+                        color={job.active ? "red" : "green"}
+                        onClick={() => activeInactiveJob(job)}
+                      >
+                        {job.active ? "Inactive" : "Active"}
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          ) : (
+            <div className="flex justify-center items-center text-xl py-10">
+              No Job Posted!
+            </div>
+          )}
         </Card>
       </div>
     </div>

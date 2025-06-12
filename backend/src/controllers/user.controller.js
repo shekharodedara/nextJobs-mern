@@ -6,7 +6,6 @@ import {
   deleteFromCloudinary,
   uploadOnCloudinary,
 } from "../utils/cloudinary.service.js";
-import { JobSeekerProfile } from "../models/jobSeekerProfile.model.js";
 
 // Testing endpoints
 const ping = (req, res) => {
@@ -20,7 +19,6 @@ const cookieOptions = {
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
   sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-  maxAge: 1000 * 60 * 60 * 24 * 7
 };
 
 const generateAccessAndRefereshTokens = async (userId) => {
@@ -332,7 +330,9 @@ const updateResume = asyncHandler(async (req, res) => {
   user.userProfile.resume = resume;
   user.markModified("userProfile.resume");
   await user.save();
-  return res.status(200).json(new ApiResponse(200, {}, "Resume updated successfully"));
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Resume updated successfully"));
 });
 
 const updateResumeFile = asyncHandler(async (req, res) => {
@@ -364,7 +364,9 @@ const updateResumeFile = asyncHandler(async (req, res) => {
     } catch {}
   }
   const updatedUser = await User.findById(req.user._id).select("-password");
-  return res.status(200).json(new ApiResponse(200, updatedUser, "Resume uploaded successfully"));
+  return res
+    .status(200)
+    .json(new ApiResponse(200, updatedUser, "Resume uploaded successfully"));
 });
 
 const userPublicProfile = asyncHandler(async (req, res) => {

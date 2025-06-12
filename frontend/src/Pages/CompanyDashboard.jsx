@@ -24,7 +24,7 @@ function CompanyDashboard() {
           <Route path="/applications" element={<Applications />} />
           <Route path="/shortedlisted" element={<Shortlisted />} />
           <Route path="/post-job" element={<JobPosting />} />
-          <Route path="/messages" element={<Messages currentUser={userData} />} />
+          <Route path="/messages" element={<Messages />} />
         </Routes>
       </div>
     </div>

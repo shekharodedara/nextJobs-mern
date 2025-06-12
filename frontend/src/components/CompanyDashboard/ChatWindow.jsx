@@ -2,50 +2,65 @@ import React, { useEffect, useRef } from "react";
 
 const ChatWindow = ({
   messages,
-  currentUserRole,
+  currentUserId,
   input,
   setInput,
   onSend,
   bgColor,
   selectedUserName,
+  selectedUserProfile,
+  currentUserProfile,
 }) => {
-  const messagesEndRef = useRef(null);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
   return (
-    <div className={`flex flex-col flex-1 ${bgColor}`}>
-      <div className="p-4 bg-white border-b font-semibold">{selectedUserName}</div>
+    <div className={`flex flex-col flex-grow ${bgColor} p-4`}>
+      <div className="font-bold text-xl mb-4">{selectedUserName}</div>
+      <div className="flex-grow overflow-y-auto">
+        {messages && messages.map((msg) => {
+          const isCurrentUser = msg.senderId === currentUserId;
+          const profilePic = isCurrentUser ? currentUserProfile : selectedUserProfile;
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-2">
-        {messages && messages.map((msg, idx) => (
-          <div
-            key={idx}
-            className={`max-w-[70%] px-4 py-2 rounded-lg ${
-              msg.senderId === currentUser._id
-                ? "bg-green-100 self-end ml-auto text-right"
-                : "bg-blue-100 self-start mr-auto text-left"
-            }`}
-          >
-            {msg.text}
-          </div>
-        ))}
-        <div ref={messagesEndRef} />
+          return (
+            <div
+              key={msg._id}
+              className={`flex mb-2 items-center ${
+                isCurrentUser ? "justify-end" : "justify-start"
+              }`}
+            >
+              {!isCurrentUser && (
+                <img
+                  src={profilePic}
+                  alt="profile"
+                  className="w-8 h-8 rounded-full mr-2"
+                />
+              )}
+              <div
+                className={`p-2 rounded ${
+                  isCurrentUser ? "bg-blue-500 text-white" : "bg-gray-200 text-black"
+                } max-w-xs`}
+              >
+                {msg.text}
+              </div>
+              {isCurrentUser && (
+                <img
+                  src={profilePic}
+                  alt="profile"
+                  className="w-8 h-8 rounded-full ml-2"
+                />
+              )}
+            </div>
+          );
+        })}
       </div>
 
-      <form onSubmit={onSend} className="flex p-4 border-t bg-white">
+      <form onSubmit={onSend} className="mt-4 flex">
         <input
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none"
-          placeholder="Type your message..."
+          type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          className="flex-grow border rounded p-2"
+          placeholder="Type a message"
         />
-        <button
-          type="submit"
-          className="ml-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-        >
+        <button type="submit" className="ml-2 bg-blue-600 text-white px-4 rounded">
           Send
         </button>
       </form>

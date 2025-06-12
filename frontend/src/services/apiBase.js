@@ -14,9 +14,13 @@ export async function apiCall(method, url, data) {
       url === "/users/login" ||
       url === "/users/profile/jobseeker"
       ? res
+      : url === "/messages/participants" ||
+        url.includes("/messages/conversations/") ||
+        url === "/messages/send"
+      ? res.data
       : res.data.data;
   } catch (error) {
-    // throw error;
+    throw error;
   }
 }
 

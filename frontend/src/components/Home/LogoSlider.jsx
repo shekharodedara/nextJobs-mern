@@ -7,7 +7,6 @@ const logos = [
   "https://logo.clearbit.com/eleks.com",
   "logos:microsoft",
   "logos:youtube",
-  "https://logo.clearbit.com/iflair.com",
   "logos:netflix",
   "logos:airbnb",
   "logos:behance",

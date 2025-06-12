@@ -1,6 +1,5 @@
 import { apiCall } from "./apiBase";
 
-// services/messageService.js
 export function getChatUsers() {
   return apiCall("get", "/messages/participants");
 }

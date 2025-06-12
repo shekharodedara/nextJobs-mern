@@ -118,7 +118,7 @@ function Navbar() {
               <div className="px-20 flex gap-8 items-center justify-center">
                 <Link to="/notification">
                   <span>
-                    <i className="fa-solid fa-message text-xl text-gray-600"></i>
+                    {userData.role !== "employer" && <i className="fa-solid fa-message text-xl text-gray-600"></i>}
                   </span>
                 </Link>
                 <div className="relative shado">

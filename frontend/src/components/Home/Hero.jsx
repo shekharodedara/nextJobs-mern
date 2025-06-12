@@ -43,9 +43,9 @@ function Hero({ userData }) {
               </button>
             }
           </Link>
-          <p className="underline font-semibold text-gray-900">
+          {/* <p className="underline font-semibold text-gray-900">
             <a href="#">Download App</a>
-          </p>
+          </p> */}
         </div>
         <div className="mt-24 flex gap-8 items-center md:items-end justify-center md:justify-normal md:pl-20 pl-14 pb-9 md:pb-0 px-5 md:px-0 md:pt-5">
           <div className="py-3.5 w-20 border-2 border-black font-semibold text-gray-900 hover:scale-105 shadow-heroBox flex justify-center items-center">
