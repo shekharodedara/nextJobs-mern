@@ -12,8 +12,16 @@ const ChatWindow = ({
   currentUserProfile,
 }) => {
   return (
-    <div className={`flex flex-col flex-grow ${bgColor} p-4`}>
-      <div className="font-bold text-xl mb-4">{selectedUserName}</div>
+    <div className={`flex flex-col w-full h-full ${bgColor} p-4`}>
+      <div className="flex items-center mb-4">
+        <img
+          src={selectedUserProfile}
+          alt="profile"
+          className="w-10 h-10 rounded-full mr-3"
+        />
+        <span className="font-bold text-xl">{selectedUserName}</span>
+      </div>
+
       <div className="flex-grow overflow-y-auto">
         {messages && messages.map((msg) => {
           const isCurrentUser = msg.senderId === currentUserId;
@@ -22,9 +30,8 @@ const ChatWindow = ({
           return (
             <div
               key={msg._id}
-              className={`flex mb-2 items-center ${
-                isCurrentUser ? "justify-end" : "justify-start"
-              }`}
+              className={`flex mb-2 items-center ${isCurrentUser ? "justify-end" : "justify-start"
+                }`}
             >
               {!isCurrentUser && (
                 <img
@@ -34,9 +41,8 @@ const ChatWindow = ({
                 />
               )}
               <div
-                className={`p-2 rounded ${
-                  isCurrentUser ? "bg-blue-500 text-white" : "bg-gray-200 text-black"
-                } max-w-xs`}
+                className={`p-2 rounded ${isCurrentUser ? "bg-blue-500 text-white" : "bg-gray-200 text-black"
+                  } max-w-xs`}
               >
                 {msg.text}
               </div>

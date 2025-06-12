@@ -71,16 +71,15 @@ const Messages = () => {
   const bgColor =
     selectedUser?.role === "jobSeeker" ? "bg-yellow-50" : "bg-pink-50";
   return (
-    <div className="flex h-screen">
+    <div className="pt-16 h-screen flex">
       <div className="w-64 bg-white border-r overflow-y-auto">
         <div className="p-4 font-bold text-xl border-b">Messages</div>
         <ul className="divide-y">
           {filteredUsers.map((user) => (
             <li
               key={user._id}
-              className={`p-4 cursor-pointer hover:bg-blue-50 ${
-                user._id === selectedUserId ? "bg-blue-100 font-semibold" : ""
-              }`}
+              className={`p-4 cursor-pointer hover:bg-blue-50 ${user._id === selectedUserId ? "bg-blue-100 font-semibold" : ""
+                }`}
               onClick={() => setSelectedUserId(user._id)}
             >
               <div className="flex items-center">
@@ -99,7 +98,6 @@ const Messages = () => {
           ))}
         </ul>
       </div>
-
       <ChatWindow
         messages={messages}
         currentUserId={currentUser._id}
