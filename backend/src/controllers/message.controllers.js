@@ -6,30 +6,18 @@ import { getIO } from "../socket.js";
 export const getChatUsers = async (req, res) => {
   try {
     const userId = req.user._id;
-    const messages = await Message.find({
-      $or: [{ senderId: userId }, { receiverId: userId }],
-    });
-
-    if (messages.length === 0) {
-      const users = await User.find().select("_id username role userProfile");
-      return res.json(users);
+    const currentUser = await User.findById(userId);
+    if (!currentUser) {
+      return res.status(404).json({ message: "User not found" });
     }
+    const targetRole =
+      currentUser.role === "jobSeeker" ? "employer" : "jobSeeker";
+    const users = await User.find({
+      role: targetRole,
+      _id: { $ne: userId },
+    }).select("_id username role userProfile");
 
-    const userIds = [
-      ...new Set(
-        messages.map((msg) =>
-          msg.senderId.toString() === userId.toString()
-            ? msg.receiverId.toString()
-            : msg.senderId.toString()
-        )
-      ),
-    ];
-
-    const users = await User.find({ _id: { $in: userIds } }).select(
-      "_id username role userProfile"
-    );
-
-    res.json(users);
+    return res.json(users);
   } catch (err) {
     res
       .status(500)

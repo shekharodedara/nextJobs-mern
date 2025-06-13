@@ -7,8 +7,8 @@ export const initSocket = (server) => {
     cors: {
       origin: ["http://localhost:5173", `http://${process.env.SYSTEM_PI}:5173`],
       methods: ["GET", "POST"],
-      credentials: true
-    }
+      credentials: true,
+    },
   });
 
   io.on("connection", (socket) => {
@@ -19,7 +19,9 @@ export const initSocket = (server) => {
     });
 
     socket.on("sendMessage", ({ senderId, receiverId, message }) => {
-      io.to(receiverId).emit("receiveMessage", { senderId, message });
+      const payload = { senderId, receiverId, message };
+      io.to(receiverId).emit("receiveMessage", payload);
+      io.to(senderId).emit("receiveMessage", payload);
     });
 
     socket.on("disconnect", () => {

@@ -2,21 +2,28 @@ import React from "react";
 
 function JobSuggestion() {
   const jobs = [
-  {
-    title: "Inside Sales Executive",
-    company: "Shining Stars Institution & travels",
-    location: "Noida, Uttar Pradesh",
-    logo: "https://img.naukri.com/logo_images/v3/302585.gif",
-    posted: "Posted 1 day ago",
-  },
-  {
-    title: "Software Engineer",
-    company: "Tech Corp",
-    location: "Bangalore, Karnataka",
-    logo: "https://example.com/techcorp-logo.png",
-    posted: "Posted 3 days ago",
-  }
-];
+    {
+      title: "Business Development Manager",
+      company: "Siemens",
+      location: "Munich, Germany",
+      logo: "https://logo.clearbit.com/simens.com",
+      posted: "Posted 2 days ago",
+    },
+    {
+      title: "Frontend Developer",
+      company: "Spotify",
+      location: "Stockholm, Sweden",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg",
+      posted: "Posted 1 day ago",
+    },
+    {
+      title: "Cloud Infrastructure Engineer",
+      company: "OVHcloud",
+      location: "Roubaix, France",
+      logo: "https://logo.clearbit.com/coursera.com",
+      posted: "Posted 4 days ago",
+    }
+  ];
   return (
     <div className="border rounded-3xl p-5 flex flex-col gap-5">
       <div>
